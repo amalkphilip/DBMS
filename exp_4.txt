@@ -1,0 +1,25 @@
+create table student_exp4(std_id int primary key,sname varchar(30),mathematics int,chemistry int, physics int);
+
+truncate table student_exp4;
+alter table student_exp4 add total int;
+insert into student_exp4 values(1,'aby',12,12,40,'pass',64);
+insert into student_exp4 values(2,'abhishek',12,12,40,'pass',64);
+insert into student_exp4 values(3,'abin',8,5,30,'fail',42);
+insert into student_exp4 values(4,'alex',9,11,36,'fail',56);
+insert into student_exp4 values(5,'alwin',12,12,45,'pass',69);
+insert into student_exp4 values(6,'amal',12,13,48,'pass',73);
+insert into student_exp4 values(7,'anand',8,10,44,'pass',62);
+insert into student_exp4 values(8,'joe',10,10,33,'pass',53);
+insert into student_exp4 values(9,'levin',11,11,41,'pass',63);
+insert into student_exp4 values(10,'vijelee',10,5,42,'fail',57);
+select * from student_exp4;
+select avg(physics) from student_exp4;
+select max(mathematics) as highest_marks_maths from student_exp4;
+select min(chemistry) as lowest_marks_chemistry from student_exp4;
+select count(status) from student_exp4 where status='pass';
+select count(physics) from student_exp4 where physics>=12;
+select sname,status from student_exp4 order by total desc;
+select count(*)*100/10 as pass_percentage from student_exp4 where mathematics>=25;
+select avg(total) from student_exp4 where status='pass';
+select avg(total) from student_exp4;
+select count(status) from student_exp4 where status='pass';
