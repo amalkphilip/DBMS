@@ -1,0 +1,38 @@
+create table Customer_exp5(CustomerID int primary key, CustomerName varchar(30), ContactNo int, Address varchar(30), City varchar(30), PostalCode int, Country varchar(30));
+
+Create table Orders_exp5 (OrderID int primary key, CustomerID int,EmployeeID int,OrderDate date,ShipperID int,foreign key (EmployeeID) references Employees_exp5,foreign key (CustomerID) references Customer_exp5);
+
+Create table Employees_exp5 (EmployeeID int primary key, LastName varchar(30), FirstName varchar(30), BirthDate date, Photo varchar(30));
+
+insert into Customer_exp5 values(101,'alex',1234567890,'abcd','abc',123,'india');
+
+insert into Customer_exp5 values(102,'alwin',1234589680,'ardybcd','abcghj',132,'india');
+insert into Customer_exp5 values(103,'amal',1236587890,'errfabcd','arsfgmsbc',193,'india');
+insert into Customer_exp5 values(104,'amal shaji',78265451,'abgjjscd','stjssfc',8123,'india');
+insert into Customer_exp5 values(107,'levin jacob',1234565440,'nafsbfcd','ftjc',956,'usa');
+
+select * from customer_exp5;
+
+insert into employees_exp5 values(10,'philip','amal','1/1/2006','png');
+insert into employees_exp5 values(11,'sabu','alex','8/2/2006','png');
+insert into employees_exp5 values(12,'sabu','alwin','5/11/2005','png');
+insert into employees_exp5 values(13,'michael','amal','1/1/2006','png');
+insert into employees_exp5 values(14,'jacob','levin','19/4/2006','png');
+
+select * from employees_exp5;
+
+insert into orders_exp5 values (7,101,11,'17/5/2025',1007);
+insert into orders_exp5 values (8,102,12,'13/7/2023',1008);
+insert into orders_exp5 values (3,103,10,'10/5/2024',1003);
+insert into orders_exp5 values (11,105,14,'18/12/1958',1011);
+insert into orders_exp5 values (5,105,14,'5/8/2025',1005);
+select * from Orders_exp5;
+
+select * from customer_exp5 order by CustomerName;
+select * from Orders_exp5 order by OrderDate;
+select * from employees_exp5 where BirthDate >'31/12/1980' order by BirthDate desc;
+select distinct(OrderDate),CustomerName from Orders_exp5,Customer_exp5 where Country='usa' order by Orderdate desc;
+select distinct(CustomerName),count(OrderDate) from customer_exp5,Orders_exp5 group by Customername;
+select distinct(city),count(CustomerID) from customer_exp5 group by city;
+select distinct(CustomerName),count(OrderDate) from customer_exp5,Orders_exp5 group by CustomerName;
+select distinct(city),count(CustomerName) from customer_exp5,Orders_exp5 where  group by CustomerName;
