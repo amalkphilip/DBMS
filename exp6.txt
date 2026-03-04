@@ -1,0 +1,46 @@
+create table Items_exp6 (itemid int primary key,Itemname varchar(50),categories varchar(20),price int,Instock int check (Instock>=0));
+create table Customers_exp6 (Custid int primary key, custname varchar(30),Address varchar(20),state varchar(20));
+create table Orders_exp6 (Orderid int primary key,Itemid int,Custid int,Quantity int,OrderDate date,foreign key (Itemid) references Items_exp6,foreign key (Custid) references Customers_exp6);
+create table Delevery_exp6(Deliveryid int primary key,Custid int,Orderid int, foreign key (Custid) references Customers_exp6,foreign key (Orderid) references Orders_exp6);
+
+insert into Items_exp6 values(100,'item A','phone',45000,15);
+insert into Items_exp6 values(101,'item B','phone',70000,15);
+insert into Items_exp6 values(102,'item C','food',250,105);
+insert into Items_exp6 values(103,'item D','phone',50000,15);
+insert into Items_exp6 values(104,'item E','soft drinks',1000,24);
+
+insert into Customers_exp6 values(1,'sabu kuttan','kundanpally','Africa');
+insert into Customers_exp6 values(2,'alex','boot house','palai');
+insert into Customers_exp6 values(3,'mudiyan','kanjipally','india');
+insert into Customers_exp6 values(4,'amal','kochu','kanjirapally');
+insert into Customers_exp6 values(5,'joe','sayip bhavan','england');
+insert into Customers_exp6 values(6,'abhishek','samy bhavan','oolanpara');
+
+insert into Orders_exp6 values(10,100,1,1,'14/10/2025');
+insert into Orders_exp6 values(11,102,5,1,'05/07/2024');
+insert into Orders_exp6 values(12,102,4,10,'22/09/2025');
+insert into Orders_exp6 values(13,104,1,10,'14/10/2025');
+insert into Orders_exp6 values(14,101,3,1,'7/02/2026');
+insert into Orders_exp6 values(15,102,2,20,'14/1/2026');
+insert into Orders_exp6 values(17,103,6,21,'15/10/2022');
+insert into Orders_exp6 values(18,103,6,21,'15/10/2022');
+insert into Orders_exp6 values(19,102,4,10,'22/09/2025');
+
+
+insert into Delevery_exp6 values(1000,1,10);
+insert into Delevery_exp6 values(1001,5,11);
+insert into Delevery_exp6 values(1002,4,12);
+insert into Delevery_exp6 values(1003,1,13);
+insert into Delevery_exp6 values(1004,3,14);
+insert into Delevery_exp6 values(1005,2,15);
+insert into Delevery_exp6 values(1006,6,17);
+
+select distinct(custname),Address,state from Customers_exp6 left join Orders_exp6 on orders_exp6.custid = customers_exp6.custid;
+select distinct(custname),Address,state from Customers_exp6 inner join Delevery_exp6 on Delevery_exp6.custid = customers_exp6.custid;
+select orderDate from orders_exp6 inner join Customers_exp6 on orders_exp6.custid = customers_exp6.custid where customers_exp6.custname like 'j%';
+select Itemname,price from Items_exp6 inner join Orders_exp6 on orders_exp6.itemid = items_exp6.itemid inner join customers_exp6 on orders_exp6.custid = customers_exp6.custid where custname = 'mickey';
+select * from Customers_exp6 inner join orders_exp6 on orders_exp6.custid = customers_exp6.custid inner join delevery_exp6 on delevery_exp6.Orderid = orders_exp6.Orderid where orders_exp6.orderDate>'31/01/2023' and minus(select custid from customers_exp6);
+
+select * from Customers_exp6;
+select * from Orders_exp6;
+select * from delevery_exp6;
