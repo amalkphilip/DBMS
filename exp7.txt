@@ -1,0 +1,18 @@
+Create table bank_exp7(bankname varchar(30), headoffice varchar(30), branch int, branchcode varchar(30) primary key);
+TRUNCATE table bank_exp7;
+insert into bank_exp7 values('SBI BANK','DELHI',30,'SBI');
+insert into bank_exp7 values('CANARA BANK','ERNAKULAM',20,'CNB');
+insert into bank_exp7 values('SOUTH INDIAN BANK','MADRAS',30,'SIB');
+insert into bank_exp7 values('AXIS BANK','KOTTAYAM',15,'AXB');
+insert into bank_exp7 values('FEDERAL BANK','ERNAKULAM',25,'FDB');
+
+commit;
+SELECT * FROM BANK_EXP7;
+
+insert into bank_exp7 values('ICL FINCROP','ERNAKULAM',10,'ICL');
+
+SAVEPOINT S1;
+
+insert into bank_exp7 values('BOOTHOUSE BANK','PALAI',2,'BHB');
+SAVEPOINT S2;
+ROLLBACK TO S1;
