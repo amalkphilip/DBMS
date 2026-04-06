@@ -1,0 +1,81 @@
+set serveroutput on
+show serveroutput
+create table back_cust(cus_id int primary key,cus_name varchar(20));
+
+create or replace trigger trig
+after insert on cust
+for each row 
+begin
+  DBMS_output.put_line('A row is inserted succesfully');
+end;
+/
+insert into cust values(1,'amal');
+
+create or replace trigger trigge
+before delete or update on cust
+for each row 
+begin
+  if deleting then
+    insert into back_cust (cus_id, cus_name) values (:OLD.cus_id,:OLD.cus_name);
+  end if;
+ DBMS_output.put_line('A row is inserted succesfully in the backup table');
+end;
+/
+
+DELETE FROM cust WHERE cus_id = 3;
+
+desc cust;
+desc back_cust;
+select * from cust;
+select * from back_cust;
+ALTER TRIGGER trigge ;
+DELETE FROM cust WHERE cus_id = 1;
+
+Create Or Replace Trigger Trig After Insert On Empdetails
+For Each Row
+When(New.Salary>20000)
+Begin
+  Dbms_Output.Put_Line('Salary is greater than 20000');
+end;
+/
+Insert Into Empdetails (Empid, Empname, Salary) Values(2, 'Alen', 30000);
+Select * From Custcount;
+
+
+
+create or replace function factorial(n int)
+return int is
+  fact int:=1;
+begin
+  for i in 1..n loop
+    fact:=fact*i;
+  end loop;
+  return fact;
+end;
+/
+declare 
+  result int;
+begin
+  result:=factorial(5);
+  DBMS_OUTPUT.PUT_LINE('factorial is '||result);
+end;
+/
+
+Create Table Std_19(Rollno Number Primary Key, Marks Number, Phone_No Number);
+Insert Into Std_19 Values(1, 32, 9823187618);
+Insert Into Std_19 Values(2, 29, 9786727218);
+Insert Into Std_19 Values(3, 40, 9827987987);
+Insert Into Std_19 Values(4, 30, 9136148429);
+Insert Into Std_19 Values(5, 25, 9546197981);
+
+Create Or Replace Procedure Pr1 As
+Begin
+  Update Std_19
+  Set Marks=Marks+(Marks*0.05);
+End;
+/
+Begin
+  Pr1;
+End;
+/
+select * from std_19;
